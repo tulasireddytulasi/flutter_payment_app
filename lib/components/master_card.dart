@@ -5,7 +5,9 @@ Card buildCreditCard({
   required String cardNumber,
   required String cardHolder,
   required String cardExpiration,
+  required BuildContext context,
 }) {
+  final double _screenWidth = MediaQuery.of(context).size.width;
   return Card(
     elevation: 4.0,
     color: color,
@@ -67,9 +69,14 @@ Card buildCreditCard({
             children: <Widget>[
               buildDetailsBlock(
                 label: 'CARDHOLDER',
+                width: _screenWidth / 1.6,
                 value: cardHolder,
               ),
-              buildDetailsBlock(label: 'VALID THRU', value: cardExpiration),
+              buildDetailsBlock(
+                label: 'VALID THRU',
+                width: _screenWidth / 5.6,
+                value: cardExpiration,
+              ),
             ],
           ),
         ],
@@ -78,22 +85,31 @@ Card buildCreditCard({
   );
 }
 
-Column buildDetailsBlock({required String label, required String value}) {
+Column buildDetailsBlock(
+    {required String label, required String value, required double width}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
       Text(
         label,
+        softWrap: true,
+        overflow: TextOverflow.ellipsis,
         style: const TextStyle(
             color: Colors.grey, fontSize: 10, fontWeight: FontWeight.bold),
       ),
-      Text(
-        value,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-          letterSpacing: .5,
+      SizedBox(
+        width: width,
+        child: Text(
+          value,
+          softWrap: true,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            letterSpacing: .5,
+          ),
         ),
       )
     ],

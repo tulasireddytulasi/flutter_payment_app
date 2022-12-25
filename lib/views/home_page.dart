@@ -2,6 +2,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../components/card_alert_dialog.dart';
 import '../components/card_input_formatter.dart';
 import '../components/card_month_input_formatter.dart';
@@ -49,6 +50,7 @@ class _HomePageState extends State<HomePage> {
                   front: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: buildCreditCard(
+                      context: context,
                       color: kDarkBlue,
                       cardExpiration: cardExpiryDateController.text.isEmpty
                           ? "08/2022"
@@ -96,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                             CustomPaint(
                               painter: MyPainter(),
                               child: SizedBox(
-                                height: 35,
+                                height: 38,
                                 width: MediaQuery.of(context).size.width / 1.2,
                                 child: Align(
                                   alignment: Alignment.centerRight,
